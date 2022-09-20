@@ -1,8 +1,9 @@
 const Tour = require('../models/Tour')
+const { getTourServices, createTourServices } = require('../services/tour.services')
 
 exports.getTour = async (req, res, next) => {
     try {
-        const result = await Tour.find({})
+        const result = await getTourServices()
         res.status(200).json({
             status: 'success',
             message: 'Tours Data get Successfully',
@@ -20,7 +21,7 @@ exports.getTour = async (req, res, next) => {
 
 exports.createTour = async (req, res, next) => {
     try {
-        const result = await Tour.create(req.body)
+        const result = await createTourServices(req.body)
         res.status(200).json({
             status: 'success',
             message: "Data inserted Successfully",

@@ -7,3 +7,5 @@ router
 .route('/')
 .get(tourControllers.getTour)
 .post(tourControllers.createTour)
+
+module.exports = router
