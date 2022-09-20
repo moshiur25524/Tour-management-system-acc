@@ -1,5 +1,5 @@
 const Tour = require('../models/Tour')
-const { getTourServices, createTourServices } = require('../services/tour.services')
+const { getTourServices, createTourServices, updateTourService } = require('../services/tour.services')
 
 exports.getTour = async (req, res, next) => {
     try {
@@ -32,6 +32,25 @@ exports.createTour = async (req, res, next) => {
         res.status(400).json({
             status: 'fail',
             message: 'Tour insert fail',
+            error: error.message
+        })
+    }
+}
+
+exports.updateATour = async(req, res) =>{
+    try{
+        const {id} = req.params
+        const result = await updateTourService(id, req.body)
+        res.status(200).json({
+            status: 'success',
+            message: 'The Tour is Successfully updated',
+            data: result
+        })
+    }
+    catch(error){
+        res.status(400).json({
+            status: 'fail',
+            message: 'The Data Update is failed',
             error: error.message
         })
     }

@@ -8,4 +8,8 @@ router
 .get(tourControllers.getTour)
 .post(tourControllers.createTour)
 
+router
+.route('/:id')
+.patch(tourControllers.updateATour)
+
 module.exports = router
