@@ -16,6 +16,14 @@ exports.getTour = async (req, res, next) => {
             queries.fieldsBy = fieldsBy
         }
 
+        if(req.query.page){
+
+            const {page=1, limit=10} = req.query;
+            const skip = (page -1)*parseInt(limit)
+            queries.skip = skip
+            queries.limit = parseInt(limit)
+        }
+
         const result = await getTourServices(queries)
         res.status(200).json({
             status: 'success',
