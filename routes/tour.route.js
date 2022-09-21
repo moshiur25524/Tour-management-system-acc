@@ -10,6 +10,7 @@ router
 
 router
 .route('/:id')
+.get(tourControllers.getTourById)
 .patch(tourControllers.updateATour)
 
 module.exports = router

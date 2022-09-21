@@ -1,5 +1,5 @@
 const Tour = require('../models/Tour')
-const { getTourServices, createTourServices, updateTourService } = require('../services/tour.services')
+const { getTourServices, createTourServices, updateTourService, getTourServiceById } = require('../services/tour.services')
 
 exports.getTour = async (req, res, next) => {
     try {
@@ -15,7 +15,7 @@ exports.getTour = async (req, res, next) => {
             const fieldsBy = req.query.fields.split(',').join(' ')
             queries.fieldsBy = fieldsBy
         }
-        
+
         const result = await getTourServices(queries)
         res.status(200).json({
             status: 'success',
@@ -27,6 +27,25 @@ exports.getTour = async (req, res, next) => {
         res.status(400).json({
             status: 'fail',
             message: 'Tours Data cannot get',
+            error: error.message
+        })
+    }
+}
+
+exports.getTourById = async (req, res, next) => {
+    try {
+        const {id} = req.params;
+        const result = await getTourServiceById(id)
+        res.status(200).json({
+            status: 'success',
+            message: "Data inserted Successfully",
+            data: result
+        })
+    }
+    catch (error) {
+        res.status(400).json({
+            status: 'fail',
+            message: 'Tour insert fail',
             error: error.message
         })
     }
