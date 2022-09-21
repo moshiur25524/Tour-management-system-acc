@@ -3,7 +3,14 @@ const { getTourServices, createTourServices, updateTourService } = require('../s
 
 exports.getTour = async (req, res, next) => {
     try {
-        const result = await getTourServices()
+
+        const queries = {}
+
+        if(req.query.sort){
+            const sortBy = req.query.sort.split(',').join(' ')
+            queries.sortBy = sortBy;
+        }
+        const result = await getTourServices(queries)
         res.status(200).json({
             status: 'success',
             message: 'Tours Data get Successfully',
