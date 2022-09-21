@@ -1,7 +1,7 @@
 const Tour = require('../models/Tour')
 
 exports.getTourServices = async(queries)=>{
-const tours = await Tour.find({}).sort(queries.sortBy)
+const tours = await Tour.find({}).sort(queries.sortBy).select(queries.fieldsBy)
 return tours
 }
 

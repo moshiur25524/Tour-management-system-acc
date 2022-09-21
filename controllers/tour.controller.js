@@ -10,6 +10,12 @@ exports.getTour = async (req, res, next) => {
             const sortBy = req.query.sort.split(',').join(' ')
             queries.sortBy = sortBy;
         }
+
+        if(req.query.fields){
+            const fieldsBy = req.query.fields.split(',').join(' ')
+            queries.fieldsBy = fieldsBy
+        }
+        
         const result = await getTourServices(queries)
         res.status(200).json({
             status: 'success',
